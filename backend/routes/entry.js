@@ -29,6 +29,7 @@ router.route('/add').post((req, res) => {
   //console.log(checkIn);
   let checkDate = req.body.checkIn;
   checkDate = new Date(checkDate).toLocaleString("en-US", {timeZone: "Asia/Kolkata",hour12: false});
+  
   let d= new Date(checkDate);
   let dd= d.getDate();
   let mm= d.getMonth()+1;
@@ -50,8 +51,8 @@ router.route('/add').post((req, res) => {
       let st = String(minu) + " " + String(h) + " " + String(dd)  + " " + String(mm)  + " *"; 
       let st1 = String(minu1) + " " + String(h1) + " " + String(dd1)  + " " + String(mm1)  + " *";
       
-      let checkInMsg = name + " has checked in to office. Phone number - "+phone+" Check-in time -"+d+" check-out time - "+checkOut;
-      let checkOutMsg = name + " has checked out from office. Phone number - "+phone+" Check-in time -"+d+" check-out time - "+checkOut+" host name - "+hostName+ " address visited - "+address;
+      let checkInMsg = name + " has checked in to office. Phone number - "+phone+" Check-in time -"+d+" check-out time - "+d1;
+      let checkOutMsg = name + " has checked out from office. Phone number - "+phone+" Check-in time -"+d+" check-out time - "+d1+" host name - "+hostName+ " address visited - "+address;
       
       cron.schedule(st, function () {
         console.log("Running Cron Job for checkin mail");
@@ -72,7 +73,7 @@ router.route('/add').post((req, res) => {
             to: hostEmail, // list of receivers trevor.swaniawski@ethereal.email
             subject: 'Check In mail', // Subject line
             text: checkInMsg, // plain text body
-            html: checkOutMsg // html body
+            html: checkInMsg // html body
         };
     
         transporter.sendMail(mailOptions, function (error, info) {
