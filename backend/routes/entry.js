@@ -7,6 +7,13 @@ const nodeMailer = require('nodemailer');
 var helper = require('sendgrid').mail;
 const async = require('async');
 
+const sgMail = require('@sendgrid/mail');
+
+const sendgridApi = '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';
+
+sgMail.setApiKey(sendgridApi);
+
+
 router.route('/').get((req, res) => {
   Guest.find()
     .then(guests => res.json(guests))
@@ -25,7 +32,7 @@ router.route('/add').post((req, res) => {
   const hostPhone = req.body.hostPhone;
 
   const newGuest = new Guest({name,hostName,email,phone,checkIn,checkOut,address,hostEmail,hostPhone,});
-
+  
   //console.log(checkIn);
   let checkDate = req.body.checkIn;
   checkDate = new Date(checkDate).toLocaleString("en-US", {timeZone: "Asia/Kolkata",hour12: false});
@@ -54,72 +61,37 @@ router.route('/add').post((req, res) => {
       let checkInMsg = name + " has checked in to office. Phone number - "+phone+" Check-in time -"+d+" check-out time - "+d1;
       let checkOutMsg = name + " has checked out from office. Phone number - "+phone+" Check-in time -"+d+" check-out time - "+d1+" host name - "+hostName+ " address visited - "+address;
       
+      
+
+
+      
+      console.log("successfully sent.");
       cron.schedule(st, function () {
         console.log("Running Cron Job for checkin mail");
-        
-        let transporter = nodeMailer.createTransport({
-            host: 'smtp.ethereal.email',
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-              user: 'dawn.ernser@ethereal.email',
-              pass: '8yanhncNcShcXQfwnQ'
-            }
-          });
-
        
-        const mailOptions = {
-            from: 'dawn.ernser@ethereal.email', // sender address
-            to: hostEmail, // list of receivers trevor.swaniawski@ethereal.email
-            subject: 'Check In mail', // Subject line
-            text: checkInMsg, // plain text body
-            html: checkInMsg // html body
-        };
-    
-        transporter.sendMail(mailOptions, function (error, info) {
-            
-            if (error) {
-              console.log('error');
-                console.log(error);
-            }else{
-              console.log('info');
-              console.log(info);
-            }
+       
+        
+        sgMail.send({
+          to:hostEmail,
+          from:email,
+          subject:"Check In mail",
+          text:checkInMsg,
+          html:checkInMsg
         });
+       
       });
 
       cron.schedule(st1, function () {
         console.log("Running Cron Job for checkout mail");
         
-        let transporter = nodeMailer.createTransport({
-            host: 'smtp.ethereal.email',
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-              user: 'dawn.ernser@ethereal.email',
-              pass: '8yanhncNcShcXQfwnQ'
-            }
-          });
-
-       
-        const mailOptions = {
-            from: hostEmail, // sender address
-            to: email, // list of receivers trevor.swaniawski@ethereal.email
-            subject: 'Check Out mail', // Subject line
-            text: checkOutMsg, // plain text body
-            html: checkOutMsg // html body
-        };
-    
-        transporter.sendMail(mailOptions, function (error, info) {
-            
-            if (error) {
-              console.log('error');
-                console.log(error);
-            }else{
-              console.log('info');
-              console.log(info);
-            }
+        sgMail.send({
+          to:email,
+          from:hostEmail,
+          subject:"Check Out mail",
+          text:checkOutMsg,
+          html:checkOutMsg
         });
+        
       });
       
       
