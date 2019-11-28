@@ -1,0 +1,41 @@
+{
+  "name": "innovaccer-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "async": "^3.1.0",
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.3.1",
+    "react": "^16.12.0",
+    "react-datepicker": "^2.10.1",
+    "react-datetime-picker": "^2.7.1",
+    "react-dom": "^16.12.0",
+    "react-phone-number-input": "^2.4.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "sendgrid": "^5.2.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
