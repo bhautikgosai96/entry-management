@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/navbar";
 import Guest from "./components/guest";
-import Host from "./components/host";
+//import Host from "./components/host";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Navbar></Navbar>
       <br/>
       <Route path="/" exact component={Guest}/>
-      <Route path="/host" component={Host}/>
+      {/* <Route path="/host" component={Host}/> */}
       </div>
     </Router>
     

@@ -50,73 +50,76 @@ router.route('/add').post((req, res) => {
       let st = String(minu) + " " + String(h) + " " + String(dd)  + " " + String(mm)  + " *"; 
       let st1 = String(minu1) + " " + String(h1) + " " + String(dd1)  + " " + String(mm1)  + " *";
       
-      // cron.schedule(st, function () {
-      //   console.log("Running Cron Job for checkin mail");
+      let checkInMsg = name + " has checked in to office. Phone number - "+phone+" Check-in time -"+d+" check-out time - "+checkOut;
+      let checkOutMsg = name + " has checked out from office. Phone number - "+phone+" Check-in time -"+d+" check-out time - "+checkOut+" host name - "+hostName+ " address visited - "+address;
+      
+      cron.schedule(st, function () {
+        console.log("Running Cron Job for checkin mail");
         
-      //   let transporter = nodeMailer.createTransport({
-      //       host: 'smtp.ethereal.email',
-      //       port: 587,
-      //       secure: false, // true for 465, false for other ports
-      //       auth: {
-      //         user: 'dawn.ernser@ethereal.email',
-      //         pass: '8yanhncNcShcXQfwnQ'
-      //       }
-      //     });
+        let transporter = nodeMailer.createTransport({
+            host: 'smtp.ethereal.email',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+              user: 'dawn.ernser@ethereal.email',
+              pass: '8yanhncNcShcXQfwnQ'
+            }
+          });
 
        
-      //   const mailOptions = {
-      //       from: 'dawn.ernser@ethereal.email', // sender address
-      //       to: 'bhautikng143@yahoo.com', // list of receivers trevor.swaniawski@ethereal.email
-      //       subject: 'Test mail', // Subject line
-      //       text: 'A Message from Node Cron App', // plain text body
-      //       html: '<b>A Message from Node Cron App</b>' // html body
-      //   };
+        const mailOptions = {
+            from: 'dawn.ernser@ethereal.email', // sender address
+            to: hostEmail, // list of receivers trevor.swaniawski@ethereal.email
+            subject: 'Check In mail', // Subject line
+            text: checkInMsg, // plain text body
+            html: checkOutMsg // html body
+        };
     
-      //   transporter.sendMail(mailOptions, function (error, info) {
+        transporter.sendMail(mailOptions, function (error, info) {
             
-      //       if (error) {
-      //         console.log('error');
-      //           console.log(error);
-      //       }else{
-      //         console.log('info');
-      //         console.log(info);
-      //       }
-      //   });
-      // });
+            if (error) {
+              console.log('error');
+                console.log(error);
+            }else{
+              console.log('info');
+              console.log(info);
+            }
+        });
+      });
 
-      // cron.schedule(st1, function () {
-      //   console.log("Running Cron Job for checkout mail");
+      cron.schedule(st1, function () {
+        console.log("Running Cron Job for checkout mail");
         
-      //   let transporter = nodeMailer.createTransport({
-      //       host: 'smtp.ethereal.email',
-      //       port: 587,
-      //       secure: false, // true for 465, false for other ports
-      //       auth: {
-      //         user: 'dawn.ernser@ethereal.email',
-      //         pass: '8yanhncNcShcXQfwnQ'
-      //       }
-      //     });
+        let transporter = nodeMailer.createTransport({
+            host: 'smtp.ethereal.email',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+              user: 'dawn.ernser@ethereal.email',
+              pass: '8yanhncNcShcXQfwnQ'
+            }
+          });
 
        
-      //   const mailOptions = {
-      //       from: 'dawn.ernser@ethereal.email', // sender address
-      //       to: 'bhautikng143@yahoo.com', // list of receivers trevor.swaniawski@ethereal.email
-      //       subject: 'Test mail', // Subject line
-      //       text: 'A Message from Node Cron App', // plain text body
-      //       html: '<b>A Message from Node Cron App</b>' // html body
-      //   };
+        const mailOptions = {
+            from: hostEmail, // sender address
+            to: email, // list of receivers trevor.swaniawski@ethereal.email
+            subject: 'Check Out mail', // Subject line
+            text: checkOutMsg, // plain text body
+            html: checkOutMsg // html body
+        };
     
-      //   transporter.sendMail(mailOptions, function (error, info) {
+        transporter.sendMail(mailOptions, function (error, info) {
             
-      //       if (error) {
-      //         console.log('error');
-      //           console.log(error);
-      //       }else{
-      //         console.log('info');
-      //         console.log(info);
-      //       }
-      //   });
-      // });
+            if (error) {
+              console.log('error');
+                console.log(error);
+            }else{
+              console.log('info');
+              console.log(info);
+            }
+        });
+      });
       
       
 
