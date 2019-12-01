@@ -3,6 +3,7 @@
 In the project directory, you can run:
 
 Step 1 - run command "npm install" in innovacer-tracker directory
+
 step 2 - run command "npm install" in innovacer-tracker/backend directory
 ### `npm install`
 
@@ -10,7 +11,9 @@ to install node dependencies.
 
 Step 3 - 
 run command "export SENDGRID_API=<api-key>"
+
 plesase use api key.
+
 run command "nodemon server.js" to start server from innovacer-tracker/backend directory
 ### `nodemon server.js`
 
