@@ -9,17 +9,17 @@ step 2 - run command "npm install" in innovacer-tracker/backend directory
 
 to install node dependencies.
 
-Step 3 - 
-### `run command "export SENDGRID_API=<api-key>"`
+Step 3 - run command
+### `export SENDGRID_API=<api-key>`
 
-plesase use api key.
+plesase use api key which is provided in document.
 
-run command "nodemon server.js" to start server from innovacer-tracker/backend directory
+Step -4 run command "nodemon server.js" to start server from innovacer-tracker/backend directory
 ### `nodemon server.js`
 
 This will run your server.
 
-Step 4 - run command "npm start" from innovacer-tracker directory
+Step 5 - run command "npm start" from innovacer-tracker directory
 ### `npm start`
 
 Open [http://localhost:3000] to view it in the browser.
