@@ -10,7 +10,7 @@ step 2 - run command "npm install" in innovacer-tracker/backend directory
 to install node dependencies.
 
 Step 3 - 
-### 'run command "export SENDGRID_API=<api-key>"'
+### `run command "export SENDGRID_API=<api-key>"`
 
 plesase use api key.
 
