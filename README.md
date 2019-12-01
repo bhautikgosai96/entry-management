@@ -10,7 +10,7 @@ to install node dependencies.
 
 Step 3 - 
 run command "export SENDGRID_API=<api-key>"
-plesase use api key which is sent in mail by me.
+plesase use api key.
 run command "nodemon server.js" to start server from innovacer-tracker/backend directory
 ### `nodemon server.js`
 
