@@ -66,33 +66,33 @@ router.route('/add').post((req, res) => {
 
       
       console.log("successfully sent.");
-      // cron.schedule(st, function () {
-      //   console.log("Running Cron Job for checkin mail");
+      cron.schedule(st, function () {
+        console.log("Running Cron Job for checkin mail");
        
        
         
-      //   sgMail.send({
-      //     to:hostEmail,
-      //     from:email,
-      //     subject:"Check In mail",
-      //     text:checkInMsg,
-      //     html:checkInMsg
-      //   });
+        sgMail.send({
+          to:hostEmail,
+          from:email,
+          subject:"Check In mail",
+          text:checkInMsg,
+          html:checkInMsg
+        });
        
-      // });
+      });
 
-      // cron.schedule(st1, function () {
-      //   console.log("Running Cron Job for checkout mail");
+      cron.schedule(st1, function () {
+        console.log("Running Cron Job for checkout mail");
         
-      //   sgMail.send({
-      //     to:email,
-      //     from:hostEmail,
-      //     subject:"Check Out mail",
-      //     text:checkOutMsg,
-      //     html:checkOutMsg
-      //   });
+        sgMail.send({
+          to:email,
+          from:hostEmail,
+          subject:"Check Out mail",
+          text:checkOutMsg,
+          html:checkOutMsg
+        });
         
-      // });
+      });
       
       
 
