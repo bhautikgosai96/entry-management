@@ -8,11 +8,14 @@ var helper = require('sendgrid').mail;
 const async = require('async');
 
 const sgMail = require('@sendgrid/mail');
-
 const sendgridApi = process.env.SENDGRID_API;
-
 sgMail.setApiKey(sendgridApi);
 
+const accountSid = process.env.ACCOUNT_ID;
+const authToken = process.env.AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
+const senderPhone = process.env.SENDER_PHONE;
 
 router.route('/').get((req, res) => {
   Guest.find()
@@ -33,6 +36,9 @@ router.route('/add').post((req, res) => {
 
   const newGuest = new Guest({name,hostName,email,phone,checkIn,checkOut,address,hostEmail,hostPhone,});
   
+  let gPhone = "+91"+req.body.phone;
+  let hPhone = "+91"+req.body.hostPhone;
+
   //console.log(checkIn);
   let checkDate = req.body.checkIn;
   checkDate = new Date(checkDate).toLocaleString("en-US", {timeZone: "Asia/Kolkata",hour12: false});
@@ -65,7 +71,7 @@ router.route('/add').post((req, res) => {
 
 
       
-      console.log("successfully sent.");
+      //console.log("successfully sent.");
       cron.schedule(st, function () {
         console.log("Running Cron Job for checkin mail");
        
@@ -78,6 +84,14 @@ router.route('/add').post((req, res) => {
           text:checkInMsg,
           html:checkInMsg
         });
+
+        client.messages
+          .create({
+            body: checkInMsg,
+            from: senderPhone,
+            to: hPhone
+          })
+          .then(message => console.log(message.sid));
        
       });
 
@@ -91,6 +105,14 @@ router.route('/add').post((req, res) => {
           text:checkOutMsg,
           html:checkOutMsg
         });
+
+        client.messages
+        .create({
+           body: checkOutMsg,
+           from: senderPhone,
+           to: gPhone
+         })
+        .then(message => console.log(message.sid));
         
       });
       

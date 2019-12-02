@@ -12,7 +12,13 @@ to install node dependencies.
 Step 3 - run command
 ### `export SENDGRID_API=<api-key>`
 
-please use api key which is provided in document.
+### `export ACCOUNT_ID='<account-id>'`
+
+### `export AUTH_TOKEN='<auth-token>'`
+
+### `export SENDER_PHONE='<sender-phone>'`
+
+please use api key, account id, auth token and sender mobile number which is provided in document.
 
 Step 4 - run command "nodemon server.js" to start server from innovacer-tracker/backend directory
 ### `nodemon server.js`
@@ -27,11 +33,10 @@ Open [http://localhost:3000] to view it in the browser.
 In \backend\model\entry.model.js, i have initialized mongoose and collectin schema.
 
 In \backend\routes\entry.js, Form data will be added to mongodb collection. I have created 2 cron job for scheduling mail service for checkin time and check out time. It will be run on time given by user in form.
-I have smtp.ethereal.email service to send email.
 
 In \src\components\guest.js i have created guest information form in react.
 
-In server side console you will get successful message when cron job will be executed.
+In server side console you will get successful message and message id when cron job will be executed.
 
 
 
